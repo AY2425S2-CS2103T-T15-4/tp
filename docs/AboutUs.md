@@ -44,7 +44,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/jhwan0707)]
 
-* Role: Developer
+* Role: Team Lead, Developer
 
 ### Cheong Rui Feng
 
