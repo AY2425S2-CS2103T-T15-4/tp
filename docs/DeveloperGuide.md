@@ -275,29 +275,120 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                                                                           | So that I can…​                                                        |
+|----------|--------------------------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions                                                                 | refer to instructions when I forget how to use the App                 |
+| `* * *`  | real estate agent                          | add potential client with their budget, preferred location, and house requirements     | track their needs                                                      |
+| `* * *`  | real estate agent                          | edit a buyer’s/seller's preferences                                                    | update their requirements as they change.                              |
+| `* * *`  | real estate agent                          | see a ranked list of best-matched clients for a property                               | prioritize my outreach                                                 |
+| `* * *`  | real estate agent                          | find a person by name                                                                  | locate details of persons without having to go through the entire list |
+| `* * *`  | real estate agent                          | keep notes on interactions with buyers and sellers                                     | follow up effectively.                                                 |
+| `* * `   | real estate agent                          | remove inactive buyers or sellers from the system                                      | keep my data relevant                                                  |
+| `* *`    | user with limited time                     | send automated messages to potential buyers when a new property matches their criteria | can keep them informed                                                 |
+| `* *`    | real estate agent                          | search for properties using filters (e.g., location, size, price)                      | find relevant listings                                                 |
+| `*`      | real estate agent                          | export my buyer/seller lists to an external file                                       | share information outside the system                                   |
+| `*`      | real estate agent                          | integrate a calendar to schedule viewings                                              | manage appointments efficiently                                        |
+| `*`      | user with many persons in the address book | sort persons by name                                                                   | locate a person easily                                                 |
+
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ConnectEase` and the **Actor** is the `real estate agent`, unless specified otherwise)
+
+**Use case: Adding new client**
+
+**MSS**
+
+1. User requests to add a new client, and inputs details on client's preferences
+2. ConnectEase validates input and saves client to the database
+3. ConnectEase displays confirmation message
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User input is invalid or missing key information
+  
+    * ConnectEase prompts user to correct errors.
+  
+      Use case resumes from step 2.
+
+
+**Use case: Editing client's preferences**
+
+**MSS**
+
+1. User requests to edit a client's details.
+2. ConnectEase prompts user for new details
+3. User inputs new details
+4. ConnectEase validates input
+5. ConnectEase overrides old information in the database
+6. ConnectEase updates all other client's information to match the changes
+7. ConnectEase displays confirmation message
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User input is invalid or missing key information
+
+    * 2a1. ConnectEase prompts user to correct errors.
+
+      Use case resumes from step 4.
+
+* 3a. User cancels the process
+  
+    Use case ends.
+
+
+**Use case: Looking for matches**
+
+**MSS**
+
+1. User requests a list of all clients
+2. ConnectEase provides the list of all clients
+3. User requests for all matches for a given client
+4. ConnectEase returns the computed matches
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. There exists no matches for the given client
+
+    * 2a1. ConnectEase informs the user there is no match
+
+      Use case ends.
+
+**Use case: Looking for Clients which meet a criteria**
+
+**MSS**
+
+1. User requests a list of all clients which meet a given criteria (Name, location, etc)
+2. ConnectEase provides the list of all corresponding clients
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. There exists no matches for the given client
+
+    * 2a1. ConnectEase informs the user there is no match
+
+      Use case ends.
+
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  ConnectEase shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  ConnectEase deletes the person
 
     Use case ends.
 
@@ -309,7 +400,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. ConnectEase shows an error message.
 
       Use case resumes at step 2.
 
@@ -320,13 +411,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The software should work without requiring an installer.
+5.  The software should not depend on your own remote server
 
 *{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Buyer**: A client who is looking to purchase a property.
+* **Seller**: A client who is looking to sell a property.
+* **Match**: A connection between a buyer and a seller based on shared preferences such as budget, location, and house size.
+* **Listing**: A property that a seller has made available for sale.
+* **Property Preferences**: A buyer’s desired property characteristics, including budget, location, house size, and type.
+* **Computed Matches**: Preprocessed buyer-seller pairings stored in the system, rather than dynamically calculated on request.
+* **Real Estate Agent**: The primary user of the system, responsible for managing buyers, sellers, and property transactions.
+* **Client**: A general term referring to either a buyer or seller in the system.
+* **ConnectEase**: The name of the real estate matching application.
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Private Contact Detail**: A contact detail that is not meant to be shared with others.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
