@@ -9,15 +9,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chuah Zi Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chuahziyang.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/chuahziyang)]
 
-* Role: Project Advisor
+* Role: Software Engineer
 
 ### Jane Doe
 
