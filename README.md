@@ -15,15 +15,15 @@ ConnectEase is a command-line interface (CLI) tool designed for real estate agen
 
 ## The Experience
 Imagine you’re at an open house:
-- You: “Start a thread for Mike”  
-  ConnectEase: “Mike’s on board! Contact info?”  
-  You: “mike@buyer.com, met here, wants a fixer-upper”  
-  ConnectEase: “Mike: Open house meet, fixer-upper fan. Tag him?”
+- You: “Start a thread for Mike”
+  ConnectEase: “Mike’s on board! Contact info?”
+  You: “mike@buyer.com, met here, wants a fixer-upper”
+  ConnectEase: “Mike: Open house meet, fixer-upper fan. Tag him?"
 
 Later, sealing the deal:
-- You: “Drop a capsule for Mike”  
-  ConnectEase: “What’s the milestone?”  
-  You: “Closed today, $300K sale”  
+- You: “Drop a capsule for Mike”
+  ConnectEase: “What’s the milestone?”
+  You: “Closed today, $300K sale”
   ConnectEase: “Locked for March 19, 2025—big win, agent!”
 
 ## Final Pitch
