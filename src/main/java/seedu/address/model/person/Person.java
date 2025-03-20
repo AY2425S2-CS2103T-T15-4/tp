@@ -36,7 +36,8 @@ public class Person {
     /**
      * Constructor with leadStatus parameter
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String leadStatus, Boolean isBuyer) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String leadStatus,
+                  Boolean isBuyer) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -133,9 +134,9 @@ public class Person {
         if (leadStatus != null) {
             builder.add("leadStatus", leadStatus);
         }
-        if (isBuyer != null) {
-            builder.add("isBuyer", isBuyer);
-        }
+        //        if (isBuyer != null) {
+        //            builder.add("isBuyer", isBuyer);
+        //        }
         return builder.toString();
     }
 
