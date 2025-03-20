@@ -51,3 +51,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/cerulyean)]
 
 * Role: Developer
+
+### Guo Fengming
+
+<img src="images/Gu0Fengming.png" width="200px">
+
+[[github](https://github.com/Gu0Fengming)]
+
+* Role: Developer
