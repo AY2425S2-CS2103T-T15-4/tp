@@ -25,17 +25,18 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final String leadStatus;
+    private final Boolean isBuyer;
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, tags, null);
+        this(name, phone, email, address, tags, null, false);
     }
 
     /**
      * Constructor with leadStatus parameter
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String leadStatus) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String leadStatus, Boolean isBuyer) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -43,6 +44,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.leadStatus = leadStatus;
+        this.isBuyer = isBuyer;
     }
 
     public Name getName() {
@@ -71,6 +73,9 @@ public class Person {
 
     public String getLeadStatus() {
         return leadStatus;
+    }
+    public Boolean getIsBuyer() {
+        return isBuyer;
     }
 
     /**
@@ -107,13 +112,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && Objects.equals(leadStatus, otherPerson.leadStatus);
+                && Objects.equals(leadStatus, otherPerson.leadStatus)
+                && Objects.equals(isBuyer, otherPerson.isBuyer);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, leadStatus);
+        return Objects.hash(name, phone, email, address, tags, leadStatus, isBuyer);
     }
 
     @Override
@@ -126,6 +132,9 @@ public class Person {
                 .add("tags", tags);
         if (leadStatus != null) {
             builder.add("leadStatus", leadStatus);
+        }
+        if (isBuyer != null) {
+            builder.add("isBuyer", isBuyer);
         }
         return builder.toString();
     }
