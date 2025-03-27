@@ -101,5 +101,6 @@ public class MatchCommand extends Command {
                 .add("price", person.getPrice())
                 .toString();
     }
+
 }
 
