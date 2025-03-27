@@ -88,11 +88,11 @@ public class Person {
         return district;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public int getLandSize() {
+    public Integer getLandSize() {
         return landSize;
     }
 
