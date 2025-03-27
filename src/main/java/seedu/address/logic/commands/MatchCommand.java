@@ -74,5 +74,21 @@ public class MatchCommand extends Command {
             }
         };
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof MatchCommand)) {
+            return false;
+        }
+
+        MatchCommand otherMatch = (MatchCommand) other;
+        return person.getIsBuyer().equals(otherMatch.person.getIsBuyer())
+                && person.getDistrict().equals(otherMatch.person.getDistrict())
+                && person.getLandSize().equals(otherMatch.person.getLandSize())
+                && person.getPrice().equals(otherMatch.person.getPrice());
+    }
 }
 
