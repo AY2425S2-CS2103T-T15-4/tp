@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -156,30 +155,6 @@ public class Person {
         //            builder.add("isBuyer", isBuyer);
         //        }
         return builder.toString();
-    }
-
-    private Predicate<Person> getMatchPredicate(Person person) {
-        return candidate -> {
-            if (person.getIsBuyer() == null || candidate.getIsBuyer() == null) return false;
-
-            if (person.getDistrict() == null || candidate.getDistrict() == null ||
-                    person.getLandSize() == null || candidate.getLandSize() == null ||
-                    person.getPrice() == null || candidate.getPrice() == null) return false;
-
-            if (person.getIsBuyer()) {
-                if (candidate.getIsBuyer()) return false;
-
-                return person.getDistrict().equals(candidate.getDistrict())
-                        && candidate.getLandSize() >= person.getLandSize()
-                        && candidate.getPrice() <= person.getPrice();
-            } else {
-                if (!candidate.getIsBuyer()) return false;
-
-                return person.getDistrict().equals(candidate.getDistrict())
-                        && candidate.getLandSize() <= person.getLandSize()
-                        && candidate.getPrice() >= person.getPrice();
-            }
-        };
     }
 
 }
