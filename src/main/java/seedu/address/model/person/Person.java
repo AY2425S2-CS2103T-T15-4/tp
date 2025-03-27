@@ -26,6 +26,11 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final String leadStatus;
     private final Boolean isBuyer;
+    // TODO
+    private final String district = null;
+    private final Integer price = null;
+    private final Integer landSize = null;
+
     /**
      * Every field must be present and not null.
      */
@@ -77,6 +82,18 @@ public class Person {
     }
     public Boolean getIsBuyer() {
         return isBuyer;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getLandSize() {
+        return landSize;
     }
 
     /**

@@ -311,9 +311,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User input is invalid or missing key information
-  
+
     * ConnectEase prompts user to correct errors.
-  
+
       Use case resumes from step 2.
 
 
@@ -340,7 +340,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 4.
 
 * 3a. User cancels the process
-  
+
     Use case ends.
 
 
