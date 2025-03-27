@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.property.Property;
 
 /**
  * Wraps all data at the address-book level
@@ -92,6 +93,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    //// property methods
+
+    private final UniquePropertyList properties = new UniquePropertyList();
+
+    public void addProperty(Property property) {
+        properties.add(property);
+    }
+
+    public ObservableList<Property> getPropertyList() {
+        return properties.asUnmodifiableObservableList();
     }
 
     //// util methods
