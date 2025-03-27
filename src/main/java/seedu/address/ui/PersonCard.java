@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane leadstatus;
 
     private CommandBox commandBox;
 
@@ -56,6 +58,11 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        if (person.getLeadStatus() != null) {
+            leadstatus.getChildren().add(new Label(person.getLeadStatus()));
+            leadstatus.setManaged(true);
+            leadstatus.setVisible(true);
+        }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {

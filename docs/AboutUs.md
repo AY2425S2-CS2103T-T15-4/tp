@@ -9,15 +9,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chuah Zi Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chuahziyang.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/chuahziyang)]
 
-* Role: Project Advisor
+* Role: Software Engineer
 
 ### Jane Doe
 
@@ -51,5 +49,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/cerulyean.png" width="200px">
 
 [[github](http://github.com/cerulyean)]
+
+* Role: Developer
+
+### Guo Fengming
+
+<img src="images/Gu0Fengming.png" width="200px">
+
+[[github](https://github.com/Gu0Fengming)]
 
 * Role: Developer

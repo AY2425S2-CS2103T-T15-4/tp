@@ -57,6 +57,7 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        System.out.println("Added Person with leadStatus: " + toAdd.getLeadStatus()); // Debug for v1.3
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

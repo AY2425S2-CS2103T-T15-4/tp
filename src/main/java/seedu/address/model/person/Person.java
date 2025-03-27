@@ -24,17 +24,33 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final String leadStatus;
+    private final Boolean isBuyer;
+    // TODO
+    private final String district = null;
+    private final Integer price = null;
+    private final Integer landSize = null;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(name, phone, email, address, tags, null, false);
+    }
+
+    /**
+     * Constructor with leadStatus parameter
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String leadStatus,
+                  Boolean isBuyer) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.leadStatus = leadStatus;
+        this.isBuyer = isBuyer;
     }
 
     public Name getName() {
@@ -59,6 +75,25 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public String getLeadStatus() {
+        return leadStatus;
+    }
+    public Boolean getIsBuyer() {
+        return isBuyer;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getLandSize() {
+        return landSize;
     }
 
     /**
@@ -94,24 +129,32 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && Objects.equals(leadStatus, otherPerson.leadStatus)
+                && Objects.equals(isBuyer, otherPerson.isBuyer);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, leadStatus, isBuyer);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder builder = new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
-                .toString();
+                .add("tags", tags);
+        if (leadStatus != null) {
+            builder.add("leadStatus", leadStatus);
+        }
+        //        if (isBuyer != null) {
+        //            builder.add("isBuyer", isBuyer);
+        //        }
+        return builder.toString();
     }
 
 }
