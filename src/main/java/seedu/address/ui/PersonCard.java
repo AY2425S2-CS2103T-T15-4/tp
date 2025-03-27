@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 
 /**
@@ -43,6 +45,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane leadstatus;
 
+    private CommandBox commandBox;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -61,6 +65,27 @@ public class PersonCard extends UiPart<Region> {
         }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    tagLabel.setOnMouseClicked(event -> {
+                        if (this.commandBox != null) {
+                            try {
+                                this.commandBox.getCommandExecutor().execute("tag " + tag.tagName);
+                            } catch (CommandException | ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    tags.getChildren().add(tagLabel);
+                });
     }
+
+    /**
+     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     */
+    public PersonCard(Person person, int displayedIndex, CommandBox commandBox) {
+        this(person, displayedIndex);
+        this.commandBox = commandBox;
+    }
+
 }
