@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -89,6 +90,16 @@ public class MatchCommand extends Command {
                 && person.getDistrict().equals(otherMatch.person.getDistrict())
                 && person.getLandSize().equals(otherMatch.person.getLandSize())
                 && person.getPrice().equals(otherMatch.person.getPrice());
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("isBuyer", person.getIsBuyer())
+                .add("district", person.getDistrict())
+                .add("landSize", person.getLandSize())
+                .add("price", person.getPrice())
+                .toString();
     }
 }
 
