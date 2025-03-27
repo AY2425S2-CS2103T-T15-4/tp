@@ -32,7 +32,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     public CommandExecutor getCommandExecutor() {
-      return commandExecutor;
+        return commandExecutor;
     }
 
     /**

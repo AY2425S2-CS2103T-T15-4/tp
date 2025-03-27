@@ -29,6 +29,9 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
+    /**
+     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     */
 
     public PersonListPanel(ObservableList<Person> personList, CommandBox commandBox) {
         this(personList);

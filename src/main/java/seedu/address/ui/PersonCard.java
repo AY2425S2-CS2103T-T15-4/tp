@@ -7,9 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -69,19 +69,23 @@ public class PersonCard extends UiPart<Region> {
                     Label tagLabel = new Label(tag.tagName);
                     tagLabel.setOnMouseClicked(event -> {
                         if (this.commandBox != null) {
-                          try{
-                            this.commandBox.getCommandExecutor().execute("tag " + tag.tagName);
-                          }catch (CommandException | ParseException e){
-                            e.printStackTrace();
-                          }
+                            try {
+                                this.commandBox.getCommandExecutor().execute("tag " + tag.tagName);
+                            } catch (CommandException | ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
                     tags.getChildren().add(tagLabel);
                 });
     }
+
+    /**
+     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     */
     public PersonCard(Person person, int displayedIndex, CommandBox commandBox) {
-      this(person, displayedIndex);
-      this.commandBox = commandBox;
+        this(person, displayedIndex);
+        this.commandBox = commandBox;
     }
 
 }
