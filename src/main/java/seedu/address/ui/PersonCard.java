@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.text.NumberFormat;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -44,6 +45,11 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane leadstatus;
+    @FXML
+    private Label district;
+    @FXML
+    private Label price;
+
 
     private CommandBox commandBox;
 
@@ -58,6 +64,19 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        System.out.println("District " + person.getDistrict());
+        System.out.println("Name " + person.getName());
+        if (person.getDistrict() != null) {
+            System.out.println("InIf statement");
+            district.setText("District " + person.getDistrict().districtNumber);
+            district.setVisible(true);
+            district.setManaged(true);
+        }
+        if (person.getPrice() != null) {
+            price.setText("$" + NumberFormat.getInstance().format(person.getPrice().price) + ",000");
+            price.setVisible(true);
+            price.setManaged(true);
+        }
         if (person.getLeadStatus() != null) {
             leadstatus.getChildren().add(new Label(person.getLeadStatus()));
             leadstatus.setManaged(true);

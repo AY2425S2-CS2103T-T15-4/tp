@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.District;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -158,4 +159,32 @@ public class ParserUtil {
         }
         return new Status(trimmedStatus);
     }
+
+//    public static Client parseClientType(String client) throws ParseException {
+//        requireNonNull(client);
+//        String trimmedClient = client.trim();
+//        if (!Client.isValidClient(trimmedClient)) {
+//            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+//        }
+//        return new Client(trimmedClient);
+//    }
+
+    public static District parseDistrict(String district) throws ParseException {
+        requireNonNull(district);
+        String trimmedDistrict = district.trim();
+        if (!District.isValidDistrict(trimmedDistrict)) {
+            throw new ParseException(District.MESSAGE_CONSTRAINTS);
+        }
+        return new District(trimmedDistrict);
+    }
+
+    public static seedu.address.model.person.Price parsePersonPrice(String price) throws ParseException {
+        requireNonNull(price);
+        String trimmedPrice = price.trim();
+        if (!seedu.address.model.person.Price.isValidPrice(trimmedPrice)) {
+            throw new ParseException(seedu.address.model.person.Price.MESSAGE_CONSTRAINTS);
+        }
+        return new seedu.address.model.person.Price(trimmedPrice);
+    }
+
 }

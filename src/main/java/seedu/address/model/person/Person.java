@@ -27,22 +27,22 @@ public class Person {
     private final String leadStatus;
     private final Boolean isBuyer;
     // TODO
-    private final String district = null;
-    private final Integer price = null;
-    private final Integer landSize = null;
+    private final District district;
+    private final Price price;
+    private final Integer landSize;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, tags, null, false);
+        this(name, phone, email, address, tags, null, null, null, null, null);
     }
 
     /**
      * Constructor with leadStatus parameter
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String leadStatus,
-                  Boolean isBuyer) {
+                  Boolean isBuyer, District district, Price price, Integer landSize) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -51,6 +51,9 @@ public class Person {
         this.tags.addAll(tags);
         this.leadStatus = leadStatus;
         this.isBuyer = isBuyer;
+        this.district = district;
+        this.price = price;
+        this.landSize = landSize;
     }
 
     public Name getName() {
@@ -84,11 +87,11 @@ public class Person {
         return isBuyer;
     }
 
-    public String getDistrict() {
+    public District getDistrict() {
         return district;
     }
 
-    public Integer getPrice() {
+    public Price getPrice() {
         return price;
     }
 
