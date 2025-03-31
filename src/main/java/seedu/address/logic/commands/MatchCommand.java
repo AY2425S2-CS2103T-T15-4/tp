@@ -2,8 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,15 +26,22 @@ public class MatchCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    private final Person person;
+    private final Index targetIndex;
 
-    public MatchCommand(Person person) {
-        this.person = person;
+    public MatchCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person person = lastShownList.get(targetIndex.getZeroBased());
 
         Predicate<Person> matchPredicate = getMatchPredicate(person);
         model.updateFilteredPersonList(matchPredicate);
@@ -86,19 +95,13 @@ public class MatchCommand extends Command {
         }
 
         MatchCommand otherMatch = (MatchCommand) other;
-        return person.getIsBuyer().equals(otherMatch.person.getIsBuyer())
-                && person.getDistrict().equals(otherMatch.person.getDistrict())
-                && person.getLandSize().equals(otherMatch.person.getLandSize())
-                && person.getPrice().equals(otherMatch.person.getPrice());
+        return this.targetIndex == otherMatch.targetIndex;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("isBuyer", person.getIsBuyer())
-                .add("district", person.getDistrict())
-                .add("landSize", person.getLandSize())
-                .add("price", person.getPrice())
+                .add("targetIndex", targetIndex)
                 .toString();
     }
 
