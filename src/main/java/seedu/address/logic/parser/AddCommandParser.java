@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DISTRICT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LAND_SIZE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_PRICE;
@@ -18,6 +19,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.District;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LandSize;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -36,7 +38,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PERSON_PRICE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_DISTRICT);
+                ArgumentTokenizer.tokenize(args, PREFIX_PERSON_PRICE, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_DISTRICT, PREFIX_LAND_SIZE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -51,13 +53,17 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         District district = null;
         seedu.address.model.person.Price price = null;
+        LandSize landsize = null;
         if (!argMultimap.getValue(PREFIX_DISTRICT).isEmpty()) {
             district = ParserUtil.parseDistrict(argMultimap.getValue(PREFIX_DISTRICT).get());
         }
         if (!argMultimap.getValue(PREFIX_PERSON_PRICE).isEmpty()) {
             price = ParserUtil.parsePersonPrice(argMultimap.getValue(PREFIX_PERSON_PRICE).get());
         }
-        Person person = new Person(name, phone, email, address, tagList, null, null, district, price, null);
+        if (!argMultimap.getValue(PREFIX_LAND_SIZE).isEmpty()) {
+            landsize = ParserUtil.parseLandSize(argMultimap.getValue(PREFIX_LAND_SIZE).get());
+        }
+        Person person = new Person(name, phone, email, address, tagList, null, null, district, price, landsize);
         return new AddCommand(person);
     }
 

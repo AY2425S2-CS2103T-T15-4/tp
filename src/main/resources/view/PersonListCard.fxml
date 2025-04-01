@@ -34,6 +34,7 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="district" styleClass="cell_small_label" text="\$district" visible="false" managed="false" />
       <Label fx:id="price" styleClass="cell_small_label" text="\$price" visible="false" managed="false" />
+      <Label fx:id="landsize" styleClass="cell_small_label" text="\$landsize" visible="false" managed="false" />
     </VBox>
   </GridPane>
 </HBox>

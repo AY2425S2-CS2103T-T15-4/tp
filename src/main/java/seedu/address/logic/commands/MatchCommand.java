@@ -71,7 +71,7 @@ public class MatchCommand extends Command {
                 }
 
                 return person.getDistrict().equals(candidate.getDistrict())
-                        && candidate.getLandSize() >= person.getLandSize()
+                        && candidate.getLandSize().landsize >= person.getLandSize().landsize
                         && candidate.getPrice().price <= person.getPrice().price;
             } else {
                 if (!candidate.getIsBuyer()) {
@@ -79,7 +79,7 @@ public class MatchCommand extends Command {
                 }
 
                 return person.getDistrict().equals(candidate.getDistrict())
-                        && candidate.getLandSize() <= person.getLandSize()
+                        && candidate.getLandSize().landsize <= person.getLandSize().landsize
                         && candidate.getPrice().price >= person.getPrice().price;
             }
         };

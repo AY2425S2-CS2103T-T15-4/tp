@@ -29,7 +29,7 @@ public class Person {
     // TODO
     private final District district;
     private final Price price;
-    private final Integer landSize;
+    private final LandSize landSize;
 
     /**
      * Every field must be present and not null.
@@ -42,7 +42,7 @@ public class Person {
      * Constructor with leadStatus parameter
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String leadStatus,
-                  Boolean isBuyer, District district, Price price, Integer landSize) {
+                  Boolean isBuyer, District district, Price price, LandSize landSize) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -95,7 +95,7 @@ public class Person {
         return price;
     }
 
-    public Integer getLandSize() {
+    public LandSize getLandSize() {
         return landSize;
     }
 

@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.District;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LandSize;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -185,6 +186,15 @@ public class ParserUtil {
             throw new ParseException(seedu.address.model.person.Price.MESSAGE_CONSTRAINTS);
         }
         return new seedu.address.model.person.Price(trimmedPrice);
+    }
+
+    public static LandSize parseLandSize(String landsize) throws ParseException {
+        requireNonNull(landsize);
+        String trimmedLandSize = landsize.trim();
+        if (!LandSize.isValidLandSize(trimmedLandSize)) {
+            throw new ParseException(LandSize.MESSAGE_CONSTRAINTS);
+        }
+        return new LandSize(trimmedLandSize);
     }
 
 }

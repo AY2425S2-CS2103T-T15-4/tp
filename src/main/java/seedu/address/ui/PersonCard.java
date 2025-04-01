@@ -49,6 +49,8 @@ public class PersonCard extends UiPart<Region> {
     private Label district;
     @FXML
     private Label price;
+    @FXML
+    private Label landsize;
 
 
     private CommandBox commandBox;
@@ -77,11 +79,17 @@ public class PersonCard extends UiPart<Region> {
             price.setVisible(true);
             price.setManaged(true);
         }
+        if (person.getLandSize() != null) {
+            price.setText(person.getLandSize().landsize +" sq ft");
+            price.setVisible(true);
+            price.setManaged(true);
+        }
         if (person.getLeadStatus() != null) {
             leadstatus.getChildren().add(new Label(person.getLeadStatus()));
             leadstatus.setManaged(true);
             leadstatus.setVisible(true);
         }
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
