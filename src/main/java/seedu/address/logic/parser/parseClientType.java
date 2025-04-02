@@ -4,11 +4,8 @@ import seedu.address.model.person.ClientType;
 
 public class parseClientType {
     public static boolean isValidClientType(String clientType) {
-        if (clientType.equalsIgnoreCase("buyer") || clientType.equalsIgnoreCase("b") ||
-                clientType.equalsIgnoreCase("seller") || clientType.equalsIgnoreCase("s")) {
-            return true;
-        }
-        return false;
+        return clientType.equalsIgnoreCase("buyer") || clientType.equalsIgnoreCase("b") ||
+                clientType.equalsIgnoreCase("seller") || clientType.equalsIgnoreCase("s");
     }
 
     public static ClientType assignClientType(String clientType) {

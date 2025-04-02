@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DISTRICT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAND_SIZE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -25,7 +24,6 @@ import seedu.address.model.person.LandSize;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Price;
 import seedu.address.model.tag.Tag;
 import static seedu.address.model.person.ClientType.*;
 

@@ -40,7 +40,7 @@ public class LandSize {
      */
     public static boolean isValidLandSize(String test) {
         try {
-            Float test2 = Float.parseFloat(test);
+            float test2 = Float.parseFloat(test);
             return 0 < test2;
         } catch (NumberFormatException e) {
             return false;
@@ -60,7 +60,7 @@ public class LandSize {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Price)) {
+        if (!(other instanceof LandSize)) {
             return false;
         }
 
