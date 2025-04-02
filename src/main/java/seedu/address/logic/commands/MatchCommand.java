@@ -28,6 +28,8 @@ public class MatchCommand extends Command {
 
     private final Index targetIndex;
 
+    //Uses index to dynamically fetch the person from the model at runtime. Index is used for consistency with
+    //parameter used in delete command
     public MatchCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -71,16 +73,16 @@ public class MatchCommand extends Command {
                 }
 
                 return person.getDistrict().equals(candidate.getDistrict())
-                        && candidate.getLandSize().landsize >= person.getLandSize().landsize
-                        && candidate.getPrice().price <= person.getPrice().price;
+                        && candidate.getLandSize() >= person.getLandSize()
+                        && candidate.getPrice().getValue() <= person.getPrice().getValue();
             } else {
                 if (!candidate.getIsBuyer()) {
                     return false;
                 }
 
                 return person.getDistrict().equals(candidate.getDistrict())
-                        && candidate.getLandSize().landsize <= person.getLandSize().landsize
-                        && candidate.getPrice().price >= person.getPrice().price;
+                        && candidate.getLandSize() <= person.getLandSize()
+                        && candidate.getPrice().getValue() >= person.getPrice().getValue();
             }
         };
     }

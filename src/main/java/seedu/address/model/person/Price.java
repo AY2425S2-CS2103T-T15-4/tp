@@ -1,11 +1,15 @@
 package seedu.address.model.person;
 
+import java.text.NumberFormat;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's house's price in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPrice(String)}
+ *
+ * <p>Note: The price field is nullable. If it is not set, the price will be null.</p>
  */
 public class Price {
 
@@ -17,12 +21,19 @@ public class Price {
     /**
      * Constructs a {@code Price}.
      *
-     * @param price A valid price.
+     * @param price A valid price, or null if no price is set.
+     * @throws NullPointerException if the price is provided as a non-null value but is invalid.
      */
     public Price(String price) {
-        requireNonNull(price);
-        checkArgument(isValidPrice(price), MESSAGE_CONSTRAINTS);
-        this.price = Integer.parseInt(price);
+        if (price != null) {
+            assert(price != null);
+            checkArgument(isValidPrice(price), MESSAGE_CONSTRAINTS);
+            this.price = Integer.parseInt(price);
+            assert this.price > 0: "Should be greater than 0";
+        } else {
+            this.price = null; // Set price to null if it's not provided
+            assert(this.price == null): "This price should be null";
+        }
     }
 
     /**
@@ -61,6 +72,14 @@ public class Price {
     @Override
     public int hashCode() {
         return price.hashCode();
+    }
+
+    public Integer getValue() {
+        return this.price;
+    }
+
+    public String getFormattedPrice() {
+        return "$" + NumberFormat.getInstance().format(getValue()) + ",000";
     }
 
 }

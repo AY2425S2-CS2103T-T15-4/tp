@@ -6,6 +6,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Person's district in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDistrict(String)}
+ *
+ * <p>Note: The price field is nullable. If it is not set, the price will be null.</p>
  */
 public class District {
 
@@ -21,9 +23,14 @@ public class District {
      * @param district A valid district.
      */
     public District(String district) {
-        requireNonNull(district);
-        checkArgument(isValidDistrict(district), MESSAGE_CONSTRAINTS);
-        districtNumber = Integer.parseInt(district);
+        if (district != null) {
+            checkArgument(isValidDistrict(district), MESSAGE_CONSTRAINTS);
+            districtNumber = Integer.parseInt(district);
+            assert(districtNumber > 0 && districtNumber < 29): "Districts in singapore range from 1 to 28, inclusive";
+            assert(districtNumber instanceof Integer): "District numbers are made up of only integers";
+        } else {
+            this.districtNumber = null;
+        }
     }
 
     /**
@@ -62,6 +69,14 @@ public class District {
     @Override
     public int hashCode() {
         return districtNumber.hashCode();
+    }
+
+    public Integer getValue() {
+        return districtNumber;
+    }
+
+    public String getFormattedDistrict() {
+        return "District " + getValue();
     }
 
 }
