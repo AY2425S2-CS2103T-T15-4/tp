@@ -65,7 +65,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         if (person.getDistrict() != null) {
-            district.setText("District " + person.getDistrict().districtNumber);
+            district.setText(person.getDistrict().getFormattedDistrict());
             district.setVisible(true);
             district.setManaged(true);
         }
