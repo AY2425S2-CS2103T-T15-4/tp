@@ -26,8 +26,8 @@ public class District {
         if (district != null) {
             checkArgument(isValidDistrict(district), MESSAGE_CONSTRAINTS);
             districtNumber = Integer.parseInt(district);
-            assert(districtNumber > 0 && districtNumber < 29): "Districts in singapore range from 1 to 28, inclusive";
-            assert(districtNumber instanceof Integer): "District numbers are made up of only integers";
+            assert(districtNumber > 0 && districtNumber < 29) : "Districts in singapore range from 1 to 28, inclusive";
+            assert(districtNumber instanceof Integer) : "District numbers are made up of only integers";
         } else {
             this.districtNumber = null;
         }

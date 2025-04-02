@@ -15,7 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");
     public static final Prefix PREFIX_TYPE = new Prefix("t/");
     public static final Prefix PREFIX_STATUS = new Prefix("s/");
-    public static final Prefix PREFIX_DISTRICT  = new Prefix("d/");
+    public static final Prefix PREFIX_DISTRICT = new Prefix("d/");
     public static final Prefix PREFIX_PERSON_PRICE = new Prefix("k/");
     public static final Prefix PREFIX_LAND_SIZE = new Prefix("b/");
 }
