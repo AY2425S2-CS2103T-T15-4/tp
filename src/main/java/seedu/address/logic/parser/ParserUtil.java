@@ -160,15 +160,12 @@ public class ParserUtil {
         return new Status(trimmedStatus);
     }
 
-//    public static Client parseClientType(String client) throws ParseException {
-//        requireNonNull(client);
-//        String trimmedClient = client.trim();
-//        if (!Client.isValidClient(trimmedClient)) {
-//            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
-//        }
-//        return new Client(trimmedClient);
-//    }
-
+    /**
+     * Parses a {@code String district} into an {@code District}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code district} is invalid.
+     */
     public static District parseDistrict(String district) throws ParseException {
         requireNonNull(district);
         String trimmedDistrict = district.trim();
@@ -178,6 +175,12 @@ public class ParserUtil {
         return new District(trimmedDistrict);
     }
 
+    /**
+     * Parses a {@code String price} into an {@code Price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code price} is invalid.
+     */
     public static seedu.address.model.person.Price parsePersonPrice(String price) throws ParseException {
         requireNonNull(price);
         String trimmedPrice = price.trim();

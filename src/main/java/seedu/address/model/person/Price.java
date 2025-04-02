@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import java.text.NumberFormat;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -29,10 +28,10 @@ public class Price {
             assert(price != null);
             checkArgument(isValidPrice(price), MESSAGE_CONSTRAINTS);
             this.price = Integer.parseInt(price);
-            assert this.price > 0: "Should be greater than 0";
+            assert this.price > 0 : "Should be greater than 0";
         } else {
             this.price = null; // Set price to null if it's not provided
-            assert(this.price == null): "This price should be null";
+            assert(this.price == null) : "This price should be null";
         }
     }
 
