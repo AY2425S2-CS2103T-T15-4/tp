@@ -81,6 +81,5 @@ public class Price {
     public String getFormattedPrice() {
         return "$" + NumberFormat.getInstance().format(getValue()) + ",000";
     }
-
 }
 

@@ -67,7 +67,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         if (person.getDistrict() != null) {
-            district.setText("District " + person.getDistrict().districtNumber);
+            district.setText(person.getDistrict().getFormattedDistrict());
             district.setVisible(true);
             district.setManaged(true);
         }
@@ -77,7 +77,7 @@ public class PersonCard extends UiPart<Region> {
             price.setManaged(true);
         }
         if (person.getLandSize() != null) {
-            price.setText(person.getLandSize().landsize +" sq ft");
+            price.setText(person.getLandSize().getFormattedLandSize());
             price.setVisible(true);
             price.setManaged(true);
         }

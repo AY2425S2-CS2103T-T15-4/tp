@@ -65,4 +65,12 @@ public class LandSize {
         return landsize.hashCode();
     }
 
+    public Float getValue() {
+        return landsize;
+    }
+    public String getFormattedLandSize() {
+        return getValue() + " sq ft";
+    }
+
+
 }
