@@ -64,16 +64,13 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        System.out.println("District " + person.getDistrict());
-        System.out.println("Name " + person.getName());
         if (person.getDistrict() != null) {
-            System.out.println("InIf statement");
             district.setText("District " + person.getDistrict().districtNumber);
             district.setVisible(true);
             district.setManaged(true);
         }
         if (person.getPrice() != null) {
-            price.setText("$" + NumberFormat.getInstance().format(person.getPrice().price) + ",000");
+            price.setText(person.getPrice().getFormattedPrice());
             price.setVisible(true);
             price.setManaged(true);
         }

@@ -51,10 +51,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         District district = null;
         seedu.address.model.person.Price price = null;
-        if (!argMultimap.getValue(PREFIX_DISTRICT).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_DISTRICT).isPresent()) {
             district = ParserUtil.parseDistrict(argMultimap.getValue(PREFIX_DISTRICT).get());
         }
-        if (!argMultimap.getValue(PREFIX_PERSON_PRICE).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_PERSON_PRICE).isPresent()) {
             price = ParserUtil.parsePersonPrice(argMultimap.getValue(PREFIX_PERSON_PRICE).get());
         }
         Person person = new Person(name, phone, email, address, tagList, null, null, district, price, null);
