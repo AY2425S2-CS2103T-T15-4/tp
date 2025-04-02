@@ -10,6 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.ClientType;
 import seedu.address.model.person.Person;
 
 
@@ -54,7 +55,7 @@ public class MatchCommand extends Command {
 
     private Predicate<Person> getMatchPredicate(Person person) {
         return candidate -> {
-            if (person.getIsBuyer() == null || candidate.getIsBuyer() == null) {
+            if (person.getClientType() == ClientType.UNKNOWN || candidate.getClientType() == ClientType.UNKNOWN) {
                 return false;
             }
 
@@ -67,22 +68,24 @@ public class MatchCommand extends Command {
                 return false;
             }
 
-            if (person.getIsBuyer()) {
-                if (candidate.getIsBuyer()) {
+            if (person.getClientType().equals(ClientType.BUYER)) {
+                if (!candidate.getClientType().equals(ClientType.SELLER)) {
                     return false;
                 }
 
                 return person.getDistrict().equals(candidate.getDistrict())
                         && candidate.getLandSize().getValue() >= person.getLandSize().getValue()
                         && candidate.getPrice().getValue() <= person.getPrice().getValue();
-            } else {
-                if (!candidate.getIsBuyer()) {
+            } else if (person.getClientType().equals(ClientType.SELLER)) {
+                if (!candidate.getClientType().equals(ClientType.BUYER)) {
                     return false;
                 }
 
                 return person.getDistrict().equals(candidate.getDistrict())
                         && candidate.getLandSize().getValue() <= person.getLandSize().getValue()
                         && candidate.getPrice().getValue() >= person.getPrice().getValue();
+            } else {
+                return false;
             }
         };
     }

@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.parseClientType.assignClientType;
+import static seedu.address.logic.parser.parseClientType.isValidClientType;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -10,6 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientType;
 import seedu.address.model.person.District;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LandSize;
@@ -198,6 +201,15 @@ public class ParserUtil {
             throw new ParseException(LandSize.MESSAGE_CONSTRAINTS);
         }
         return new LandSize(trimmedLandSize);
+    }
+
+    public static ClientType parseClientType(String clientType) throws ParseException {
+        requireNonNull(clientType);
+        String trimmedClientType = clientType.trim();
+        if (!isValidClientType(trimmedClientType)) {
+            throw new ParseException(LandSize.MESSAGE_CONSTRAINTS);
+        }
+        return assignClientType(trimmedClientType);
     }
 
 }

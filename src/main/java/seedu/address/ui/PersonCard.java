@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ClientType;
 import seedu.address.model.person.Person;
 
 /**
@@ -50,6 +51,8 @@ public class PersonCard extends UiPart<Region> {
     private Label price;
     @FXML
     private Label landsize;
+    @FXML
+    private Label clienttype;
 
 
     private CommandBox commandBox;
@@ -71,19 +74,25 @@ public class PersonCard extends UiPart<Region> {
             district.setManaged(true);
         }
         if (person.getPrice() != null) {
+            System.out.println(person.getPrice().getFormattedPrice());
             price.setText(person.getPrice().getFormattedPrice());
             price.setVisible(true);
             price.setManaged(true);
         }
         if (person.getLandSize() != null) {
-            price.setText(person.getLandSize().getFormattedLandSize());
-            price.setVisible(true);
-            price.setManaged(true);
+            landsize.setText(person.getLandSize().getFormattedLandSize());
+            landsize.setVisible(true);
+            landsize.setManaged(true);
         }
         if (person.getLeadStatus() != null) {
             leadstatus.getChildren().add(new Label(person.getLeadStatus()));
             leadstatus.setManaged(true);
             leadstatus.setVisible(true);
+        }
+        if (person.getClientType() != ClientType.UNKNOWN) {
+            clienttype.setText(person.getClientType().toString());
+            clienttype.setVisible(true);
+            clienttype.setManaged(true);
         }
 
         person.getTags().stream()

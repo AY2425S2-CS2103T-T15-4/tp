@@ -2,12 +2,13 @@ package seedu.address.model.person;
 
 import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's house's price in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidLandSize(String)}
+ *
+ * <p>Note: The price field is nullable. If it is not set, the price will be null.</p>
  */
 public class LandSize {
 
@@ -20,11 +21,18 @@ public class LandSize {
      * Constructs a {@code LandSize}.
      *
      * @param landsize A valid landsize.
+     * @throws NullPointerException if the landsize is provided as a non-null value but is invalid.
      */
     public LandSize(String landsize) {
-        requireNonNull(landsize);
-        checkArgument(isValidLandSize(landsize), MESSAGE_CONSTRAINTS);
-        this.landsize = Float.parseFloat(landsize);
+        if (landsize != null) {
+            assert(landsize != null);
+            checkArgument(isValidLandSize(landsize), MESSAGE_CONSTRAINTS);
+            this.landsize = Float.parseFloat(landsize);
+            assert this.landsize > 0 : "Should be greater than 0";
+        } else {
+            this.landsize = null; // Set price to null if it's not provided
+            assert(this.landsize == null) : "The landsize should be null";
+        }
     }
 
     /**
@@ -71,6 +79,4 @@ public class LandSize {
     public String getFormattedLandSize() {
         return getValue() + " sq ft";
     }
-
-
 }

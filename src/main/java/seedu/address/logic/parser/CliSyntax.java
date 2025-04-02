@@ -18,4 +18,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_DISTRICT = new Prefix("d/");
     public static final Prefix PREFIX_PERSON_PRICE = new Prefix("k/");
     public static final Prefix PREFIX_LAND_SIZE = new Prefix("b/");
+    public static final Prefix PREFIX_CLIENT_TYPE = new Prefix("c/");
 }
