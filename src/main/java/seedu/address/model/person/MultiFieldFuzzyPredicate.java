@@ -15,9 +15,9 @@ import seedu.address.model.person.exceptions.InvalidPredicateException;
  * Matching is case-insensitive.
  */
 public class MultiFieldFuzzyPredicate implements Predicate<Person> {
-    private static final Logger logger = LogsCenter.getLogger(MultiFieldFuzzyPredicate.class.getName());
     public static final int MAX_LEVENSHTEIN_DISTANCE = 2;
     public static final String MESSAGE_EMPTY_KEYWORDS = "Keywords list cannot be empty.";
+    private static final Logger logger = LogsCenter.getLogger(MultiFieldFuzzyPredicate.class.getName());
 
     private final List<String> keywords;
 
