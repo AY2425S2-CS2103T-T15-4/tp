@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.District;
 
@@ -38,9 +39,8 @@ class JsonAdaptedDistrict {
      */
     public District toModelType() throws IllegalValueException {
         if (districtNumber == null) {
-            return new District(null);
+            return null;
         }
-        
         if (!District.isValidDistrict(districtNumber)) {
             throw new IllegalValueException(District.MESSAGE_CONSTRAINTS);
         }

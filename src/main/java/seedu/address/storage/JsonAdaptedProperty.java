@@ -20,7 +20,7 @@ public class JsonAdaptedProperty {
     private final String status;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given Property details.
+     * Constructs a {@code JsonAdaptedProperty} with the given property details.
      */
     @JsonCreator
     public JsonAdaptedProperty(@JsonProperty("price") String price,
@@ -44,9 +44,9 @@ public class JsonAdaptedProperty {
     }
 
     /**
-     * Converts this Jackson-friendly adapted Property object into the model's {@code Property} object.
+     * Converts this Jackson-friendly adapted property object into the model's {@code Property} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted Property.
+     * @throws IllegalValueException if any of the data constraints are violated.
      */
     public Property toModelType() throws IllegalValueException {
         if (!Price.isValidPrice(price)) {

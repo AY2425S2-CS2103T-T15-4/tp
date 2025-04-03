@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.ClientType;
 
@@ -40,8 +41,8 @@ class JsonAdaptedClientType {
         try {
             return ClientType.valueOf(clientType);
         } catch (IllegalArgumentException e) {
-            throw new IllegalValueException("Invalid client type: " + clientType +
-                    ". Valid types are: BUYER, SELLER, UNKNOWN");
+            throw new IllegalValueException("Invalid client type: " + clientType
+                    + ". Valid types are: BUYER, SELLER, UNKNOWN");
         }
     }
 }
