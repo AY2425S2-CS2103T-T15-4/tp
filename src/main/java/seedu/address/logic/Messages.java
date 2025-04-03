@@ -43,8 +43,21 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
+                .append(person.getAddress());
+        if (person.getDistrict() != null) {
+            builder.append("; District: ")
+                    .append(person.getDistrict().getValue());
+        }
+        builder.append("; ClientType: ").append(person.getClientType());
+        if (person.getPrice() != null) {
+            builder.append("; Price: ")
+                    .append(person.getPrice());
+        }
+        if (person.getLandSize() != null) {
+            builder.append("; Land Size: ")
+                    .append(person.getLandSize());
+        }
+        builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
