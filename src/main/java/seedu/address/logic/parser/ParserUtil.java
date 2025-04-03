@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.parseClientType.assignClientType;
+import static seedu.address.logic.parser.parseClientType.isValidClientType;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -10,7 +12,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientType;
+import seedu.address.model.person.District;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LandSize;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -158,4 +163,53 @@ public class ParserUtil {
         }
         return new Status(trimmedStatus);
     }
+
+    /**
+     * Parses a {@code String district} into an {@code District}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code district} is invalid.
+     */
+    public static District parseDistrict(String district) throws ParseException {
+        requireNonNull(district);
+        String trimmedDistrict = district.trim();
+        if (!District.isValidDistrict(trimmedDistrict)) {
+            throw new ParseException(District.MESSAGE_CONSTRAINTS);
+        }
+        return new District(trimmedDistrict);
+    }
+
+    /**
+     * Parses a {@code String price} into an {@code Price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code price} is invalid.
+     */
+    public static seedu.address.model.person.Price parsePersonPrice(String price) throws ParseException {
+        requireNonNull(price);
+        String trimmedPrice = price.trim();
+        if (!seedu.address.model.person.Price.isValidPrice(trimmedPrice)) {
+            throw new ParseException(seedu.address.model.person.Price.MESSAGE_CONSTRAINTS);
+        }
+        return new seedu.address.model.person.Price(trimmedPrice);
+    }
+
+    public static LandSize parseLandSize(String landsize) throws ParseException {
+        requireNonNull(landsize);
+        String trimmedLandSize = landsize.trim();
+        if (!LandSize.isValidLandSize(trimmedLandSize)) {
+            throw new ParseException(LandSize.MESSAGE_CONSTRAINTS);
+        }
+        return new LandSize(trimmedLandSize);
+    }
+
+    public static ClientType parseClientType(String clientType) throws ParseException {
+        requireNonNull(clientType);
+        String trimmedClientType = clientType.trim();
+        if (!isValidClientType(trimmedClientType)) {
+            throw new ParseException(LandSize.MESSAGE_CONSTRAINTS);
+        }
+        return assignClientType(trimmedClientType);
+    }
+
 }

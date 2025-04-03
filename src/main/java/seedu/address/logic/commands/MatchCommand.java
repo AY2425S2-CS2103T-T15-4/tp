@@ -2,12 +2,15 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.ClientType;
 import seedu.address.model.person.Person;
 
 
@@ -24,15 +27,24 @@ public class MatchCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    private final Person person;
+    private final Index targetIndex;
 
-    public MatchCommand(Person person) {
-        this.person = person;
+    //Uses index to dynamically fetch the person from the model at runtime. Index is used for consistency with
+    //parameter used in delete command
+    public MatchCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person person = lastShownList.get(targetIndex.getZeroBased());
 
         Predicate<Person> matchPredicate = getMatchPredicate(person);
         model.updateFilteredPersonList(matchPredicate);
@@ -43,7 +55,7 @@ public class MatchCommand extends Command {
 
     private Predicate<Person> getMatchPredicate(Person person) {
         return candidate -> {
-            if (person.getIsBuyer() == null || candidate.getIsBuyer() == null) {
+            if (person.getClientType() == ClientType.UNKNOWN || candidate.getClientType() == ClientType.UNKNOWN) {
                 return false;
             }
 
@@ -56,22 +68,24 @@ public class MatchCommand extends Command {
                 return false;
             }
 
-            if (person.getIsBuyer()) {
-                if (candidate.getIsBuyer()) {
+            if (person.getClientType().equals(ClientType.BUYER)) {
+                if (!candidate.getClientType().equals(ClientType.SELLER)) {
                     return false;
                 }
 
                 return person.getDistrict().equals(candidate.getDistrict())
-                        && candidate.getLandSize() >= person.getLandSize()
-                        && candidate.getPrice() <= person.getPrice();
+                        && candidate.getLandSize().getValue() >= person.getLandSize().getValue()
+                        && candidate.getPrice().getValue() <= person.getPrice().getValue();
+            } else if (person.getClientType().equals(ClientType.SELLER)) {
+                if (!candidate.getClientType().equals(ClientType.BUYER)) {
+                    return false;
+                }
+
+                return person.getDistrict().equals(candidate.getDistrict())
+                        && candidate.getLandSize().getValue() <= person.getLandSize().getValue()
+                        && candidate.getPrice().getValue() >= person.getPrice().getValue();
             } else {
-                if (!candidate.getIsBuyer()) {
-                    return false;
-                }
-
-                return person.getDistrict().equals(candidate.getDistrict())
-                        && candidate.getLandSize() <= person.getLandSize()
-                        && candidate.getPrice() >= person.getPrice();
+                return false;
             }
         };
     }
@@ -86,19 +100,13 @@ public class MatchCommand extends Command {
         }
 
         MatchCommand otherMatch = (MatchCommand) other;
-        return person.getIsBuyer().equals(otherMatch.person.getIsBuyer())
-                && person.getDistrict().equals(otherMatch.person.getDistrict())
-                && person.getLandSize().equals(otherMatch.person.getLandSize())
-                && person.getPrice().equals(otherMatch.person.getPrice());
+        return this.targetIndex == otherMatch.targetIndex;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("isBuyer", person.getIsBuyer())
-                .add("district", person.getDistrict())
-                .add("landSize", person.getLandSize())
-                .add("price", person.getPrice())
+                .add("targetIndex", targetIndex)
                 .toString();
     }
 

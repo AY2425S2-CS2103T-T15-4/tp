@@ -9,10 +9,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ClientType;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -44,6 +45,15 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane leadstatus;
+    @FXML
+    private Label district;
+    @FXML
+    private Label price;
+    @FXML
+    private Label landsize;
+    @FXML
+    private Label clienttype;
+
 
     private CommandBox commandBox;
 
@@ -58,11 +68,33 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        if (person.getDistrict() != null) {
+            district.setText(person.getDistrict().getFormattedDistrict());
+            district.setVisible(true);
+            district.setManaged(true);
+        }
+        if (person.getPrice() != null) {
+            System.out.println(person.getPrice().getFormattedPrice());
+            price.setText(person.getPrice().getFormattedPrice());
+            price.setVisible(true);
+            price.setManaged(true);
+        }
+        if (person.getLandSize() != null) {
+            landsize.setText(person.getLandSize().getFormattedLandSize());
+            landsize.setVisible(true);
+            landsize.setManaged(true);
+        }
         if (person.getLeadStatus() != null) {
             leadstatus.getChildren().add(new Label(person.getLeadStatus()));
             leadstatus.setManaged(true);
             leadstatus.setVisible(true);
         }
+        if (person.getClientType() != ClientType.UNKNOWN) {
+            clienttype.setText(person.getClientType().toString());
+            clienttype.setVisible(true);
+            clienttype.setManaged(true);
+        }
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {

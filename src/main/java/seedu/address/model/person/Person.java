@@ -25,24 +25,24 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final String leadStatus;
-    private final Boolean isBuyer;
+    private final ClientType clientType;
     // TODO
-    private final String district = null;
-    private final Integer price = null;
-    private final Integer landSize = null;
+    private final District district;
+    private final Price price;
+    private final LandSize landSize;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, tags, null, false);
+        this(name, phone, email, address, tags, null, ClientType.UNKNOWN, null, null, null);
     }
 
     /**
      * Constructor with leadStatus parameter
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String leadStatus,
-                  Boolean isBuyer) {
+                  ClientType clientType, District district, Price price, LandSize landSize) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -50,7 +50,10 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.leadStatus = leadStatus;
-        this.isBuyer = isBuyer;
+        this.clientType = clientType;
+        this.district = district;
+        this.price = price;
+        this.landSize = landSize;
     }
 
     public Name getName() {
@@ -80,19 +83,19 @@ public class Person {
     public String getLeadStatus() {
         return leadStatus;
     }
-    public Boolean getIsBuyer() {
-        return isBuyer;
+    public ClientType getClientType() {
+        return this.clientType;
     }
 
-    public String getDistrict() {
+    public District getDistrict() {
         return district;
     }
 
-    public Integer getPrice() {
+    public Price getPrice() {
         return price;
     }
 
-    public Integer getLandSize() {
+    public LandSize getLandSize() {
         return landSize;
     }
 
@@ -131,13 +134,13 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && Objects.equals(leadStatus, otherPerson.leadStatus)
-                && Objects.equals(isBuyer, otherPerson.isBuyer);
+                && Objects.equals(clientType, otherPerson.clientType);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, leadStatus, isBuyer);
+        return Objects.hash(name, phone, email, address, tags, leadStatus, clientType);
     }
 
     @Override
@@ -151,9 +154,6 @@ public class Person {
         if (leadStatus != null) {
             builder.add("leadStatus", leadStatus);
         }
-        //        if (isBuyer != null) {
-        //            builder.add("isBuyer", isBuyer);
-        //        }
         return builder.toString();
     }
 
