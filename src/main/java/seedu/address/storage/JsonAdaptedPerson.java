@@ -120,8 +120,6 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        System.out.println(district);
-        System.out.println(district == null);
         // District is optional, so we don't check for null
         final District modelDistrict = district == null ? null : new District(district);
 

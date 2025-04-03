@@ -145,7 +145,12 @@ The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* uses the 'JsonAdapted' classes to convert JSON data to/from Java objects.
 
+We use the 'JsonAdapted' classes to convert JSON data to/from Java objects.
+For example, the `JsonAdaptedPerson` class is used to convert a JSON object to a `Person` object.
+We also add 'JsonAdaptedDistrict' class and 'JsonAdaptedPrice' class for a similar purpose.
+  
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
@@ -454,6 +459,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **ConnectEase**: The name of the real estate matching application.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS.
 * **Private Contact Detail**: A contact detail that is not meant to be shared with others.
+* **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
+* **District**: A geographical area in Singapore, this is a number between 1 and 28.
 
 
 --------------------------------------------------------------------------------------------------------------------
