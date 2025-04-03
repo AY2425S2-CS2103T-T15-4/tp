@@ -128,6 +128,17 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Fuzzy Finding Clients: 'f'
+
+Searches clients by name (fuzzy, up to 2 edits), phone, or email (substring), case-insensitively.
+
+Format: 'f KEYWORD [MORE_KEYWORDS]'
+* Matches any field with any keyword (OR search).
+* Name uses fuzzy matching (e.g., sara matches Sarah).
+
+Examples:
+* find sara → Sarah Tan, Sara Lim.
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.

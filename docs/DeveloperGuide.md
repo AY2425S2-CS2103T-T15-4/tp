@@ -10,6 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Fuzzy search implementation inspired by Levenshtein distance algorithms from Wikipedia.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -242,6 +243,26 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+
+### Fuzzy Search Feature
+The fuzzy search feature enhances the find command to match Person objects by name (using Levenshtein distance ≤ 2), phone, or email (substring matching), case-insensitively. It’s implemented in:
+
+MultiFieldFuzzyPredicate: A Predicate<Person> in seedu.address.model.person.
+Constructor validates keywords (non-null, non-empty).
+test() checks name (fuzzy), phone, and email (substring).
+Uses LogsCenter for logging and assertions for defensive coding.
+FindCommand: Executes the predicate via Model#updateFilteredPersonList.
+FindCommandParser: Parses keywords into the predicate.
+
+### Design Considerations
+* Aspect: Matching Algorithm
+* Chosen: Levenshtein distance for names, substring for phone/email.
+  * Pros: Flexible name matching, fast substring checks.
+  * Cons: Levenshtein may lag with large lists (see alpha-bug #4).
+
+* **Alternative**: Exact matching only.
+  * Pros: Faster.
+  * Cons: Less user-friendly.
 
 
 --------------------------------------------------------------------------------------------------------------------
