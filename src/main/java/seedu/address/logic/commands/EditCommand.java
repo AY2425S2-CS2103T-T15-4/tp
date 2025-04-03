@@ -117,7 +117,8 @@ public class EditCommand extends Command {
         Price updatedprice = editPersonDescriptor.getPrice().orElse(personToEdit.getPrice());
         LandSize updatedlandSize = editPersonDescriptor.getLandSize().orElse(personToEdit.getLandSize());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, null, updatedClientType, updateddistrict, updatedprice, updatedlandSize);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, null,
+                updatedClientType, updateddistrict, updatedprice, updatedlandSize);
     }
 
     @Override
@@ -181,7 +182,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, clientType, district, price, landSize);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags,
+                    clientType, district, price, landSize);
         }
 
         public void setName(Name name) {
@@ -216,21 +218,37 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setClientType(ClientType clienttype) { this.clientType = clienttype; }
+        public void setClientType(ClientType clienttype) {
+            this.clientType = clienttype;
+        }
 
-        public Optional<ClientType> getClientType() { return Optional.ofNullable(clientType);}
+        public Optional<ClientType> getClientType() {
+            return Optional.ofNullable(clientType);
+        }
 
-        public void setDistrict(District district) { this.district = district; }
+        public void setDistrict(District district) {
+            this.district = district;
+        }
 
-        public Optional<District> getDistrict() { return Optional.ofNullable(district);}
+        public Optional<District> getDistrict() {
+            return Optional.ofNullable(district);
+        }
 
-        public void setPrice(Price price) { this.price = price; }
+        public void setPrice(Price price) {
+            this.price = price;
+        }
 
-        public Optional<Price> getPrice() { return Optional.ofNullable(price);}
+        public Optional<Price> getPrice() {
+            return Optional.ofNullable(price);
+        }
 
-        public void setLandSize(LandSize landSize) { this.landSize = landSize; }
+        public void setLandSize(LandSize landSize) {
+            this.landSize = landSize;
+        }
 
-        public Optional<LandSize> getLandSize() { return Optional.ofNullable(landSize);}
+        public Optional<LandSize> getLandSize() {
+            return Optional.ofNullable(landSize);
+        }
 
 
 
