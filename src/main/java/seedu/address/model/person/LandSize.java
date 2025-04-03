@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
-import java.util.Objects;
-
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Objects;
 
 /**
  * Represents a Person's house's price in the address book.

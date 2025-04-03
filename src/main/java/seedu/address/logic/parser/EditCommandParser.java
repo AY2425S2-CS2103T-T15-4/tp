@@ -72,7 +72,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setPrice(ParserUtil.parsePersonPrice(argMultimap.getValue(PREFIX_PERSON_PRICE).get()));
         }
         if (argMultimap.getValue(PREFIX_CLIENT_TYPE).isPresent()) {
-            editPersonDescriptor.setClientType(ParserUtil.parseClientType(argMultimap.getValue(PREFIX_CLIENT_TYPE).get()));
+            editPersonDescriptor.setClientType(ParserUtil.parseClientType(
+                    argMultimap.getValue(PREFIX_CLIENT_TYPE).get()));
         }
         if (argMultimap.getValue(PREFIX_LAND_SIZE).isPresent()) {
             editPersonDescriptor.setLandSize(ParserUtil.parseLandSize(argMultimap.getValue(PREFIX_LAND_SIZE).get()));

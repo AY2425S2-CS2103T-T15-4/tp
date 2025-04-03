@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.parseClientType.assignClientType;
-import static seedu.address.logic.parser.parseClientType.isValidClientType;
+import static seedu.address.logic.parser.ParseClientType.assignClientType;
+import static seedu.address.logic.parser.ParseClientType.isValidClientType;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -18,8 +18,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.LandSize;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.property.*;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -165,7 +165,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String district} into an {@code District}.
+     * Parses a {@code String district} into a {@code District}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code district} is invalid.
@@ -180,7 +180,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String price} into an {@code Price}.
+     * Parses a {@code String price} into a {@code Price}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code price} is invalid.
@@ -194,6 +194,12 @@ public class ParserUtil {
         return new seedu.address.model.person.Price(trimmedPrice);
     }
 
+    /**
+     * Parses a {@code String landsize} into a {@code LandSize}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code landsize} is invalid.
+     */
     public static LandSize parseLandSize(String landsize) throws ParseException {
         requireNonNull(landsize);
         String trimmedLandSize = landsize.trim();
@@ -203,13 +209,20 @@ public class ParserUtil {
         return new LandSize(trimmedLandSize);
     }
 
+    /**
+     * Parses a {@code String clientType} into a {@code ClientType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code clientType} is invalid.
+     */
     public static ClientType parseClientType(String clientType) throws ParseException {
         requireNonNull(clientType);
         String trimmedClientType = clientType.trim();
         if (!isValidClientType(trimmedClientType)) {
-            throw new ParseException(LandSize.MESSAGE_CONSTRAINTS);
+            throw new ParseException(ParseClientType.MESSAGE_CONSTRAINTS);
         }
         return assignClientType(trimmedClientType);
     }
+
 
 }
