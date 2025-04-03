@@ -264,6 +264,10 @@ FindCommandParser: Parses keywords into the predicate.
   * Pros: Faster.
   * Cons: Less user-friendly.
 
+### \[Proposed\] Add Property
+
+Structural Parallelism: A new Property class will mirror the Person class architecture, with its own fields (Address, Price, Property Type, etc.), storage handling via JsonAdaptedProperty, and dedicated PropertyListPanel UI component.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
