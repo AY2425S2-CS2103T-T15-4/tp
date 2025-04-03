@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddPropertyCommand;
@@ -17,6 +16,10 @@ import seedu.address.model.property.Property;
 import seedu.address.model.property.Status;
 import seedu.address.model.property.Type;
 
+/**
+ * Parses input arguments and creates a new {@code AddPropertyCommand} object.
+ * Validates required prefixes and constructs a {@code Property} from user input.
+ */
 public class AddPropertyCommandParser implements Parser<AddPropertyCommand> {
 
     @Override
