@@ -144,7 +144,6 @@ class JsonAdaptedPerson {
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        System.out.println(":LAKSJD:ALSKDJ");
         return new Person(modelName, modelPhone, modelEmail, modelAddress, 
                 modelTags, null, modelClientType, modelDistrict, modelPrice, modelLandSize);
     }
