@@ -59,34 +59,59 @@ public class MatchCommand extends Command {
                 return false;
             }
 
-            if (person.getDistrict() == null
-                    || candidate.getDistrict() == null
-                    || person.getLandSize() == null
-                    || candidate.getLandSize() == null
-                    || person.getPrice() == null
-                    || candidate.getPrice() == null) {
-                return false;
-            }
-
             if (person.getClientType().equals(ClientType.BUYER)) {
                 if (!candidate.getClientType().equals(ClientType.SELLER)) {
                     return false;
                 }
 
-                return person.getDistrict().equals(candidate.getDistrict())
-                        && candidate.getLandSize().getValue() >= person.getLandSize().getValue()
-                        && candidate.getPrice().getValue() <= person.getPrice().getValue();
+                if (person.getDistrict() != null && candidate.getDistrict() != null) {
+                    if (!person.getDistrict().equals(candidate.getDistrict())) {
+                        return false;
+                    }
+                }
+
+                if (person.getLandSize() != null && candidate.getLandSize() != null) {
+                    if (candidate.getLandSize().getValue() < person.getLandSize().getValue()) {
+                        return false;
+                    }
+                }
+
+                if (person.getPrice() != null && candidate.getPrice() != null) {
+                    if (candidate.getPrice().getValue() > person.getPrice().getValue()) {
+                        return false;
+                    }
+                }
+
+                return true;
+
             } else if (person.getClientType().equals(ClientType.SELLER)) {
                 if (!candidate.getClientType().equals(ClientType.BUYER)) {
                     return false;
                 }
 
-                return person.getDistrict().equals(candidate.getDistrict())
-                        && candidate.getLandSize().getValue() <= person.getLandSize().getValue()
-                        && candidate.getPrice().getValue() >= person.getPrice().getValue();
-            } else {
-                return false;
+                if (person.getDistrict() != null && candidate.getDistrict() != null) {
+                    if (!person.getDistrict().equals(candidate.getDistrict())) {
+                        return false;
+                    }
+                }
+
+                if (person.getLandSize() != null && candidate.getLandSize() != null) {
+                    if (candidate.getLandSize().getValue() > person.getLandSize().getValue()) {
+                        return false;
+                    }
+                }
+
+                if (person.getPrice() != null && candidate.getPrice() != null) {
+                    if (candidate.getPrice().getValue() < person.getPrice().getValue()) {
+                        return false;
+                    }
+                }
+
+                return true;
             }
+
+            return false;
+
         };
     }
 
