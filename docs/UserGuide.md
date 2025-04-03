@@ -180,6 +180,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ### Archiving data files `[coming in v2.0]`
 
+### Add Property `[coming soon]`
+
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
