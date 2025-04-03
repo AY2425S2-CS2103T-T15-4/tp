@@ -77,7 +77,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [d/DISTRICT] [k/PRICE] [b/LAND_SIZE] [c/CLIENT_TYPE]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -86,6 +86,7 @@ A person can have any number of tags (including 0)
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John p/812312312 e/hisemail@test.com a/address d/5 k/500 b/50 c/s`
 
 ### Listing all persons : `list`
 
@@ -93,6 +94,13 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Listing all persons with a particular tag : `tag`
+
+Shows a list of all persons in the address book who have a particular tag.
+
+Format: `tag TAGNAME TAGNAME2`
+Examples:
+* `tag friends neighbours`
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
