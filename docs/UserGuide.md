@@ -101,6 +101,7 @@ Shows a list of all persons in the address book who have a particular tag.
 Format: `tag TAGNAME TAGNAME2`
 Examples:
 * `tag friends neighbours`
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
