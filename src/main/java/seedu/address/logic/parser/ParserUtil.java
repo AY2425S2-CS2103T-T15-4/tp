@@ -18,7 +18,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.LandSize;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.property.*;
+import seedu.address.model.property.Location;
+import seedu.address.model.property.Price;
+import seedu.address.model.property.Status;
+import seedu.address.model.property.Type;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -128,6 +131,12 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a {@code String Price} into an {@code Price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code price} is invalid.
+     */
     public static Price parsePrice(String price) throws ParseException {
         requireNonNull(price);
         String trimmedPrice = price.trim();
@@ -137,6 +146,12 @@ public class ParserUtil {
         return new Price(trimmedPrice);
     }
 
+    /**
+     * Parses a {@code String Location} into an {@code Location}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Location} is invalid.
+     */
     public static Location parseLocation(String location) throws ParseException {
         requireNonNull(location);
         String trimmedLocation = location.trim();
@@ -146,6 +161,12 @@ public class ParserUtil {
         return new Location(trimmedLocation);
     }
 
+    /**
+     * Parses a {@code String type} into an {@code type}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code type} is invalid.
+     */
     public static Type parseType(String type) throws ParseException {
         requireNonNull(type);
         String trimmedType = type.trim();
@@ -155,6 +176,12 @@ public class ParserUtil {
         return new Type(trimmedType);
     }
 
+    /**
+     * Parses a {@code String status} into an {@code status}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
     public static Status parseStatus(String status) throws ParseException {
         requireNonNull(status);
         String trimmedStatus = status.trim();

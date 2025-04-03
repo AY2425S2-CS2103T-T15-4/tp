@@ -3,6 +3,9 @@ package seedu.address.model.property;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+/**
+ * Represents a Property's Status in the address book.
+ */
 public class Status {
     public static final String MESSAGE_CONSTRAINTS =
             "Status must be one of: Available, Pending, Sold";
@@ -11,6 +14,11 @@ public class Status {
 
     public final String value;
 
+    /**
+     * Constructs an {@code status}.
+     *
+     * @param status A valid status.
+     */
     public Status(String status) {
         requireAllNonNull(status);
         String trimmedStatus = status.trim();

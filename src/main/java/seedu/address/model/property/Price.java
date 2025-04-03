@@ -3,13 +3,22 @@ package seedu.address.model.property;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Property's Price in the address book.
+ */
 public class Price {
     public static final String MESSAGE_CONSTRAINTS =
-            "Prices should start with $ and contain numbers with optional commas and decimals, e.g., $500,000 or $500000.50";
+            "Prices should start with $ and contain numbers with optional commas and decimals,"
+                    + " e.g., $500,000 or $500000.50";
     public static final String VALIDATION_REGEX = "^\\$\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?$";
 
     public final String value;
 
+    /**
+     * Constructs an {@code Price}.
+     *
+     * @param price A valid Price.
+     */
     public Price(String price) {
         requireNonNull(price);
         checkArgument(isValidPrice(price), MESSAGE_CONSTRAINTS);
