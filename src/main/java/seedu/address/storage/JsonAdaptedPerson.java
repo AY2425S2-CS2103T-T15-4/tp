@@ -129,7 +129,7 @@ class JsonAdaptedPerson {
         final Price modelPrice = price == null ? null : new Price(price);
 
         // LandSize is optional, so we don't check for null
-        final LandSize modelLandSize =  landSize == null ? null : new LandSize(landSize);
+        final LandSize modelLandSize = landSize == null ? null : new LandSize(landSize);
 
         // ClientType handling - default to UNKNOWN if not specified
         ClientType modelClientType;
@@ -144,7 +144,7 @@ class JsonAdaptedPerson {
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, 
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
                 modelTags, null, modelClientType, modelDistrict, modelPrice, modelLandSize);
     }
 }

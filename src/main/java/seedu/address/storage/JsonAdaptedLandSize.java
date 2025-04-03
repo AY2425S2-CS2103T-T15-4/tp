@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.LandSize;
 
@@ -38,9 +39,8 @@ class JsonAdaptedLandSize {
      */
     public LandSize toModelType() throws IllegalValueException {
         if (landsize == null) {
-            return new LandSize(null);
+            return null;
         }
-        
         if (!LandSize.isValidLandSize(landsize)) {
             throw new IllegalValueException(LandSize.MESSAGE_CONSTRAINTS);
         }

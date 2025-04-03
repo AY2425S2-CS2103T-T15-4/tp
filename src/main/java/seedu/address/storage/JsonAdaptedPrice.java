@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Price;
 
@@ -38,9 +39,8 @@ class JsonAdaptedPrice {
      */
     public Price toModelType() throws IllegalValueException {
         if (price == null) {
-            return new Price(null);
+            return null;
         }
-        
         if (!Price.isValidPrice(price)) {
             throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
         }
