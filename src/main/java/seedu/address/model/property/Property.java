@@ -4,12 +4,18 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+/**
+ * Represents a Property in the address book.
+ */
 public class Property {
     private final Price price;
     private final Location location;
     private final Type type;
     private final Status status;
 
+    /**
+     * Every field must be present and not null.
+     */
     public Property(Price price, Location location, Type type, Status status) {
         requireAllNonNull(price, location, type, status);
         this.price = price;
@@ -18,15 +24,30 @@ public class Property {
         this.status = status;
     }
 
-    public Price getPrice() { return price; }
-    public Location getLocation() { return location; }
-    public Type getType() { return type; }
-    public Status getStatus() { return status; }
+    public Price getPrice() {
+        return price;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) return true;
-        if (!(other instanceof Property)) return false;
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Property)) {
+            return false;
+        }
         Property otherProperty = (Property) other;
         return otherProperty.getPrice().equals(getPrice())
                 && otherProperty.getLocation().equals(getLocation())
