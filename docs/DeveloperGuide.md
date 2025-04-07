@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a client).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -142,7 +142,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both ConnectEase data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 * uses the 'JsonAdapted' classes to convert JSON data to/from Java objects.
@@ -167,31 +167,31 @@ This section describes some noteworthy details on how certain features are imple
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedAddressBook#commit()` — Saves the current ConnectEase book state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous ConnectEase book state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone ConnectEase book state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial ConnectEase book state, and the `currentStatePointer` pointing to that single ConnectEase book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th client in the ConnectEase book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the ConnectEase book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted ConnectEase book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitAddressBook()`, causing another modified ConnectEase book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the ConnectEase book state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous ConnectEase book state, and restores the ConnectEase book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -214,15 +214,15 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest ConnectEase book state, then there are no undone ConnectEase states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the ConnectEase book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all ConnectEase book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -234,13 +234,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire ConnectEase book.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -268,6 +268,20 @@ FindCommandParser: Parses keywords into the predicate.
 * **Alternative**: Exact matching only.
   * Pros: Faster.
   * Cons: Less user-friendly.
+
+### Tag Search Feature
+
+The tag search feature will allow users to search for client by tag. this allows users to be able to look for a specific group of people(for example, looking for "friends").
+
+We create a brand new command called TagCommand, which will be used to execute the predicate.
+TagCommand: Executes the predicate via Model#updateFilteredPersonList.
+TagCommandParser: Parses keywords into the predicate.
+
+### Design Considerations
+* Aspect: Matching Algorithm
+* Chosen: Must be exact case-insensitive match.
+  * Pros: Exact match to what the user is looking for.
+  * Cons: May possibly have 2 different tags for the same concept(i.e. "friend" and "friends").
 
 ### \[Proposed\] Add Property
 
@@ -311,14 +325,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | real estate agent                          | add potential client with their budget, preferred location, and house requirements     | track their needs                                                      |
 | `* * *`  | real estate agent                          | edit a buyer’s/seller's preferences                                                    | update their requirements as they change.                              |
 | `* * *`  | real estate agent                          | see a ranked list of best-matched clients for a property                               | prioritize my outreach                                                 |
-| `* * *`  | real estate agent                          | find a person by name                                                                  | locate details of persons without having to go through the entire list |
+| `* * *`  | real estate agent                          | find a client by name                                                                  | locate details of client without having to go through the entire list |
 | `* * *`  | real estate agent                          | keep notes on interactions with buyers and sellers                                     | follow up effectively.                                                 |
 | `* * `   | real estate agent                          | remove inactive buyers or sellers from the system                                      | keep my data relevant                                                  |
 | `* *`    | user with limited time                     | send automated messages to potential buyers when a new property matches their criteria | can keep them informed                                                 |
 | `* *`    | real estate agent                          | search for properties using filters (e.g., location, size, price)                      | find relevant listings                                                 |
 | `*`      | real estate agent                          | export my buyer/seller lists to an external file                                       | share information outside the system                                   |
 | `*`      | real estate agent                          | integrate a calendar to schedule viewings                                              | manage appointments efficiently                                        |
-| `*`      | user with many persons in the address book | sort persons by name                                                                   | locate a person easily                                                 |
+| `*`      | user with many clients in the ConnectEase book | sort clients by name                                                                   | locate a clients easily                                                 |
 
 
 
@@ -411,14 +425,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: Delete a person**
+**Use case: Delete a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  ConnectEase shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  ConnectEase deletes the person
+1.  User requests to list clients
+2.  ConnectEase shows a list of clients
+3.  User requests to delete a specific client in the list
+4.  ConnectEase deletes the client
 
     Use case ends.
 
@@ -439,7 +453,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 client without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The software should work without requiring an installer.
 5.  The software should not depend on your own remote server
@@ -491,17 +505,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a client
 
-1. Deleting a person while all persons are being shown
+1. Deleting a client while all clients are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
