@@ -272,6 +272,7 @@ FindCommandParser: Parses keywords into the predicate.
 ### Tag Search Feature
 
 The tag search feature will allow users to search for client by tag. this allows users to be able to look for a specific group of people(for example, looking for "friends").
+We also allow the user to search for a particular tag by clicking on the tag in the person list.
 
 We create a brand new command called TagCommand, which will be used to execute the predicate.
 TagCommand: Executes the predicate via Model#updateFilteredPersonList.
@@ -282,6 +283,9 @@ TagCommandParser: Parses keywords into the predicate.
 * Chosen: Must be exact case-insensitive match.
   * Pros: Exact match to what the user is looking for.
   * Cons: May possibly have 2 different tags for the same concept(i.e. "friend" and "friends").
+* Aspect: Design pattern to inject the command object into the tag UI component.
+* Chosen: Singleton pattern.
+  * Pros: Ensure that we do not have multiple command objects running at the same time.
 
 ### \[Proposed\] Add Property
 

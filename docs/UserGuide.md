@@ -108,7 +108,10 @@ Format: `tag TAGNAME TAGNAME2`
 Examples:
 * `tag friends neighbours`
 
+Another way to search for a particular tag is to click on the tag in the person list. This will automatically filter the list to show only the clients with that tag.
+
 Restrictions: Tag must be alphanumeric.
+
 
 ### Editing a person : `edit`
 
