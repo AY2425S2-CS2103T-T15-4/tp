@@ -10,6 +10,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.property.Property;
 
+
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
@@ -17,6 +18,8 @@ import seedu.address.model.property.Property;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+
+    private final UniquePropertyList properties = new UniquePropertyList();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -96,8 +99,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //// property methods
-
-    private final UniquePropertyList properties = new UniquePropertyList();
 
     public void addProperty(Property property) {
         properties.add(property);
