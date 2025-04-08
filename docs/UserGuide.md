@@ -17,7 +17,7 @@ ConnectEase is a **desktop app for Property Agents to manage contacts, optimized
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for ConnectEase.
+1. Copy the file to the folder you want to use as the _home folder_ for your ConnectEase.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -148,16 +148,63 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Fuzzy Finding Clients: 'f'
+## Fuzzy Finding Clients: `f` Command
 
-Searches clients by name (fuzzy, up to 2 edits), phone, or email (substring), case-insensitively.
+Quickly search for clients by name, phone, or email with the `f` command. It’s smart, flexible, and forgiving—perfect for when you don’t remember exact details!
 
-Format: 'f KEYWORD [MORE_KEYWORDS]'
-* Matches any field with any keyword (OR search).
-* Name uses fuzzy matching (e.g., sara matches Sarah).
+### How It Works
+- **Command Format**: `f KEYWORD [MORE_KEYWORDS]`
+- **What It Searches**: Matches *any* keyword against a client’s name, phone, or email (an "OR" search).
+- **Case-Insensitive**: Uppercase, lowercase—it doesn’t care!
+- **Matching Rules**:
+    - **Name**: Uses *fuzzy matching* (up to 2 typo edits allowed). So, `sara` finds `Sarah` or `Sahara`.
+    - **Phone & Email**: Looks for substrings. For example, `123` matches `91234567`, and `gmail` matches `john@gmail.com`.
+
+### Examples
+| Command         | Matches These Clients                | Why?                                  |
+|-----------------|--------------------------------------|---------------------------------------|
+| `f sara`        | Sarah Tan, Sara Lim                 | Fuzzy match on name (typos allowed).  |
+| `f 9123`        | John Doe (91234567)                 | Substring match in phone.             |
+| `f gmail`       | Jane (jane@gmail.com)               | Substring match in email.             |
+| `f john 123`    | John Tan (91234567), John Lee       | Matches *any* keyword in any field.   |
+
+### Tips
+- **Short on Details?** Just type what you know—`f 45` might find a phone number or part of an email.
+- **Fuzzy Magic**: Misspellings like `jhon` still find `John` (up to 2 edits).
+- **Multiple Keywords**: Add more words to narrow it down, but it’ll still show clients matching *any* keyword.
+
+### Things to Know
+- You need at least one keyword (e.g., `f` alone won’t work).
+
+Search smarter, not harder—try `f` today!
+
+### Matching people by valid property details: `match`
+
+Looks for Clients of the opposite valid Client Type which has houses which meets the given requirements.
+
+Format: `match INDEX`
+
+* Clients will be matched if all the minimum requirements are met or better.
+* If a given attribute for a user is labelled null, that requirement will be assumed to be valid. Hence, if you put null
+* for everything you will get matched to everyone of opposing client type, except for ClientType
+* Client Type is the only field that must be filled in
+* Client Type must be opposite between the match and to be matched. So if one is a buyer, the other must be a seller, and vice versa
+* The District requirement is that the districts are the same
+* The Price requirement is that seller must have a lower Price than buyer
+* The LandSize requirement is that the seller must have a bigger than or equal LandSize than the buyer
 
 Examples:
-* find sara → Sarah Tan, Sara Lim.
+* Index 1 has a Client which is of Type BUYER and has requirements price = 5, landsize = 5, district = 5
+* Index 2 has a Client of Type SELLER and has requirements of price = 4, landsize = 6, district 5
+* Index 3 has a Client of Type SELLER and has requirements of price = 6, landsize = 5, district 5
+  ![initial list'](images/match_initial.png)
+* There does not exist any other Client
+* `match 1` returns Client 2 and his details
+  ![match 1'](images/match_1.png)
+* `match 2` returns Client 1 and his details
+  ![match 2'](images/match_2.png)
+* Client 3 is not returned as it is not compatible with the requirements of Client 1 and 2
+
 
 ### Deleting a person : `delete`
 
