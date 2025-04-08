@@ -160,14 +160,6 @@ Quickly search for clients by name, phone, or email with the `f` command. It’s
     - **Name**: Uses *fuzzy matching* (up to 2 typo edits allowed). So, `sara` finds `Sarah` or `Sahara`.
     - **Phone & Email**: Looks for substrings. For example, `123` matches `91234567`, and `gmail` matches `john@gmail.com`.
 
-### Examples
-| Command         | Matches These Clients                | Why?                                  |
-|-----------------|--------------------------------------|---------------------------------------|
-| `f sara`        | Sarah Tan, Sara Lim                 | Fuzzy match on name (typos allowed).  |
-| `f 9123`        | John Doe (91234567)                 | Substring match in phone.             |
-| `f gmail`       | Jane (jane@gmail.com)               | Substring match in email.             |
-| `f john 123`    | John Tan (91234567), John Lee       | Matches *any* keyword in any field.   |
-
 ### Tips
 - **Short on Details?** Just type what you know—`f 45` might find a phone number or part of an email.
 - **Fuzzy Magic**: Misspellings like `jhon` still find `John` (up to 2 edits).
