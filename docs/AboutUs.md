@@ -17,25 +17,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Software Engineer
 
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
 ### Chin Jung Hwan
 
 <img src="images/jhwan0707.png" width="200px">
