@@ -137,16 +137,35 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Fuzzy Finding Clients: 'f'
+## Fuzzy Finding Clients: `f` Command
 
-Searches clients by name (fuzzy, up to 2 edits), phone, or email (substring), case-insensitively.
+Quickly search for clients by name, phone, or email with the `f` command. It’s smart, flexible, and forgiving—perfect for when you don’t remember exact details!
 
-Format: 'f KEYWORD [MORE_KEYWORDS]'
-* Matches any field with any keyword (OR search).
-* Name uses fuzzy matching (e.g., sara matches Sarah).
+### How It Works
+- **Command Format**: `f KEYWORD [MORE_KEYWORDS]`
+- **What It Searches**: Matches *any* keyword against a client’s name, phone, or email (an "OR" search).
+- **Case-Insensitive**: Uppercase, lowercase—it doesn’t care!
+- **Matching Rules**:
+    - **Name**: Uses *fuzzy matching* (up to 2 typo edits allowed). So, `sara` finds `Sarah` or `Sahara`.
+    - **Phone & Email**: Looks for substrings. For example, `123` matches `91234567`, and `gmail` matches `john@gmail.com`.
 
-Examples:
-* find sara → Sarah Tan, Sara Lim.
+### Examples
+| Command         | Matches These Clients                | Why?                                  |
+|-----------------|--------------------------------------|---------------------------------------|
+| `f sara`        | Sarah Tan, Sara Lim                 | Fuzzy match on name (typos allowed).  |
+| `f 9123`        | John Doe (91234567)                 | Substring match in phone.             |
+| `f gmail`       | Jane (jane@gmail.com)               | Substring match in email.             |
+| `f john 123`    | John Tan (91234567), John Lee       | Matches *any* keyword in any field.   |
+
+### Tips
+- **Short on Details?** Just type what you know—`f 45` might find a phone number or part of an email.
+- **Fuzzy Magic**: Misspellings like `jhon` still find `John` (up to 2 edits).
+- **Multiple Keywords**: Add more words to narrow it down, but it’ll still show clients matching *any* keyword.
+
+### Things to Know
+- You need at least one keyword (e.g., `f` alone won’t work).
+
+Search smarter, not harder—try `f` today!
 
 ### Deleting a person : `delete`
 
