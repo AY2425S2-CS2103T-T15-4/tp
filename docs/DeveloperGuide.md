@@ -116,7 +116,8 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+
+**API** : [`Model.java`](https://github.com/AY2425S2-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -128,11 +129,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 
 ### Storage component
@@ -245,9 +241,36 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### \[Proposed\] Property Person Split
 
-_{Explain here how the data archiving feature will be implemented}_
+Currently, 1 client (person) can only be associated with exactly 1 house under consideration for purchase or for sale.
+By splitting up the Person class into 2 classes, Person, which we already have, and Property, the Person class can track
+multiple different properties. 
+
+Proposed Solution
+
+Introduce a new Property class that represents individual houses or units. Instead of assigning properties directly to the Person class, we create a one-to-many relationship where a single Person can be linked to multiple Property objects.
+
+* Person: Represents the client (buyer/seller).
+* Property: Contains details such as address, type (buy/sell), price, status, etc.
+* A client may have multiple associated Property entries—e.g., several houses listed for sale, or several options under consideration for purchase.
+
+Implementation
+
+* Create a Property model class, with relevant fields and optional links to a Person object.
+* Update the Person model to no longer contain property-specific fields. Instead, Property objects will refer back to the Person.
+* Update the UI and storage components to reflect the change:
+* UI: Display associated properties within each person’s view.
+* Storage: Serialize property-person associations.
+* May require adjustments to AddCommand, EditCommand, and filtering logic depending on how Property is linked and queried.
+
+Design Considerations
+* Aspect: Data Model Relationship
+* Chosen: One-to-many (Person → Property)
+* Pros: Supports clients with multiple buy/sell interests. More scalable. Cleaner separation of concerns.
+* Cons: Breaks compatibility with current commands and assumptions—requires UI, storage, and model refactoring. More complex linking logic (e.g., when deleting a person, cascade or handle related properties?).
+
+
 
 ### Fuzzy Search Feature
 The fuzzy search feature enhances the find command to match Person objects by name (using Levenshtein distance ≤ 2), phone, or email (substring matching), case-insensitively. It’s implemented in:

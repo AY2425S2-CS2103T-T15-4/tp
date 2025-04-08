@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ConnectEase Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -17,7 +17,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your ConnectEase.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -167,6 +167,34 @@ Quickly search for clients by name, phone, or email with the `f` command. It’s
 
 Search smarter, not harder—try `f` today!
 
+### Matching people by valid property details: `match`
+
+Looks for Clients of the opposite valid Client Type which has houses which meets the given requirements.
+
+Format: `match INDEX`
+
+* Clients will be matched if all the minimum requirements are met or better.
+* If a given attribute for a user is labelled null, that requirement will be assumed to be valid. Hence, if you put null
+* for everything you will get matched to everyone of opposing client type, except for ClientType
+* Client Type is the only field that must be filled in
+* Client Type must be opposite between the match and to be matched. So if one is a buyer, the other must be a seller, and vice versa
+* The District requirement is that the districts are the same
+* The Price requirement is that seller must have a lower Price than buyer
+* The LandSize requirement is that the seller must have a bigger than or equal LandSize than the buyer
+
+Examples:
+* Index 1 has a Client which is of Type BUYER and has requirements price = 5, landsize = 5, district = 5
+* Index 2 has a Client of Type SELLER and has requirements of price = 4, landsize = 6, district 5
+* Index 3 has a Client of Type SELLER and has requirements of price = 6, landsize = 5, district 5
+  ![initial list'](images/match_initial.png)
+* There does not exist any other Client
+* `match 1` returns Client 2 and his details
+  ![match 1'](images/match_1.png)
+* `match 2` returns Client 1 and his details
+  ![match 2'](images/match_2.png)
+* Client 3 is not returned as it is not compatible with the requirements of Client 1 and 2
+
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -195,15 +223,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ConnectEase data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ConnectEase data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, ConnectEase will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the ConnectEase to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -217,7 +245,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ConnectEase home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

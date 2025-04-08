@@ -161,10 +161,4 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredProperties.setPredicate(predicate);
     }
-
-    @Override
-    public ObservableList<Property> getFilteredPropertyList() {
-        return filteredProperties;
-    }
-
 }
