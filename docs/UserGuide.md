@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ConnectEase Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ConnectEase is a **desktop app for Property Agents to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ConnectEase can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -28,7 +28,7 @@ ConnectEase Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ConnectEase
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -62,6 +62,9 @@ ConnectEase Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+* Commands are all in lower case. 
+
 </div>
 
 ### Viewing help : `help`
@@ -75,7 +78,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to ConnectEase
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [d/DISTRICT] [k/PRICE] [b/LAND_SIZE] [c/CLIENT_TYPE]`
 
@@ -88,23 +91,31 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 * `add n/John p/812312312 e/hisemail@test.com a/address d/5 k/500 b/50 c/s`
 
+Additional Information:
+Since it is a common usecase to have multiple clients with the same phone number(many times clients will all communicate through the same agent). ConnectEase will allow multiple contacts with the same phone number.
+
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in ConnectEase
 
 Format: `list`
 
 ### Listing all persons with a particular tag : `tag`
 
-Shows a list of all persons in the address book who have a particular tag.
+Shows a list of all persons in the ConnectEase who have a particular tag.
 
 Format: `tag TAGNAME TAGNAME2`
 Examples:
 * `tag friends neighbours`
 
+Another way to search for a particular tag is to click on the tag in the person list. This will automatically filter the list to show only the clients with that tag.
+
+Restrictions: Tag must be alphanumeric.
+
+
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in ConnectEase
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -206,12 +217,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in ConnectEase.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from ConnectEase
 
 Format: `clear`
 
@@ -267,3 +278,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**tag** | `tag TAGNAME TAGNAME2`
